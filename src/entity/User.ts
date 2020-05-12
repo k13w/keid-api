@@ -1,12 +1,12 @@
-import { Entity, ObjectID, ObjectIdColumn, Column, CreateDateColumn, UpdateDateColumn } from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn } from "typeorm";
 import { Length, IsNotEmpty } from "class-validator";
 import bcrypt from "bcryptjs";
 
 @Entity()
 export class User {
 
-    @ObjectIdColumn()
-    id: ObjectID;
+    @PrimaryGeneratedColumn()
+    id: number;
 
     @Column()
     @Length(10, 100)
