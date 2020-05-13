@@ -8,6 +8,7 @@ require('dotenv/config')
 import bodyParser from "body-parser";
 import helmet from "helmet";
 import cors from "cors";
+import morgan from 'morgan';
 
 import routes from './routes';
 
@@ -22,6 +23,8 @@ createConnection()
     app.use(cors());
     app.use(helmet());
     app.use(bodyParser.json());
+    app.use(express.urlencoded({ extended: true }));
+    app.use(morgan("dev"))
 
     //Set all routes from routes folder
     app.use("/", routes);
