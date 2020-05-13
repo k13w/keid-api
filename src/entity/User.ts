@@ -1,6 +1,7 @@
-import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn } from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn, OneToMany } from "typeorm";
 import { Length, IsNotEmpty } from "class-validator";
 import bcrypt from "bcryptjs";
+import { Files } from './Files';
 
 @Entity()
 export class User {
@@ -23,6 +24,9 @@ export class User {
     @Column()
     @IsNotEmpty()
     role: string;
+
+    @OneToMany(type => Files, files => files.user_id)
+    files: Files[];
 
     @Column()
     @CreateDateColumn()

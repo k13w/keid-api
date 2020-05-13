@@ -1,6 +1,6 @@
 require('dotenv/config')
 
-module.exports = {
+export = {
    "type": "postgres",
    "host": process.env.DB_HOST,
    "port": 5432,

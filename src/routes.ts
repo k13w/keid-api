@@ -14,6 +14,7 @@ routes.put('/users', UserController.editUser);
 routes.delete('/users', UserController.deleteUser);
 routes.post('/sessions', AuthController.sessions);
 
-routes.post('/files', multer(config).single('file'), UploadController.files);
+routes.get('/users/:user_id/files', UploadController.files);
+routes.post('/users/:user_id/files', multer(config).single('file'), UploadController.uploadFiles);
 
 export default routes;

@@ -1,4 +1,5 @@
-import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn } from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn, ManyToOne, JoinColumn } from "typeorm";
+import { User } from "./User";
 
 @Entity()
 export class Files {
@@ -17,6 +18,9 @@ export class Files {
 
     @Column()
     url: string;
+
+    @ManyToOne(type => User, user => user.files)
+    user_id: User;
 
     @Column()
     @CreateDateColumn()
