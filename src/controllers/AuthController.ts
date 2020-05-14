@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
-import jwt from "jsonwebtoken";
 import { getRepository } from "typeorm";
 import { validate } from "class-validator";
+import jwt from "jsonwebtoken";
 
 import { User } from "../entity/User";
 import config from "../config/jwt";

@@ -10,10 +10,6 @@ class UploadController {
         const { user_id } = req.params;
         const { originalname: name, size, key, location: url = '' } = req.file;
 
-        console.log(req.file)
-
-        console.log(user_id)
-
         const userRepository = getRepository(User);
         const fileRepository = getRepository(Files);
 

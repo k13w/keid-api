@@ -1,10 +1,9 @@
 /* Config typeorm */
+require('dotenv/config')
 import "reflect-metadata";
-import { createConnection } from "typeorm";
 
 import express from 'express';
-require('dotenv/config')
-
+import { createConnection } from "typeorm";
 import bodyParser from "body-parser";
 import helmet from "helmet";
 import cors from "cors";
