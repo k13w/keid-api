@@ -7,6 +7,8 @@ import multerS3 from 'multer-s3';
 import aws from 'aws-sdk';
 import crypto from 'crypto';
 
+import { extname } from 'path';
+
 
 const storageTypes = {
     s3: multerS3({
@@ -18,7 +20,7 @@ const storageTypes = {
             crypto.randomBytes(16, (err, hash) => {
                 if (err) cb(err);
 
-                const fileName = `${hash.toString('hex')}-${file.originalname}`;
+                const fileName = hash.toString('hex') + extname(file.originalname);
                 console.log(fileName);
                 
                 cb(null, fileName);

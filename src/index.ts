@@ -23,7 +23,8 @@ createConnection()
     app.use(cors());
     app.use(helmet());
     app.use(bodyParser.json());
-    app.use(express.urlencoded({ extended: true }));
+    app.use(express.urlencoded({ limit: '50mb', extended: true }));
+    app.use(bodyParser.json({limit: '50mb'}));
     app.use(morgan("dev"))
 
     //Set all routes from routes folder

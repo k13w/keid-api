@@ -11,7 +11,7 @@ class AuthController {
     let { email, password } = req.body;
 
     if (!(email && password)) {
-      res.status(400).send({ error: 'email or password invalid!' });
+      res.status(400).send({ error: 'Email or password invalid!' });
     }
     //Get user from database
     const userRepository = getRepository(User);
@@ -26,7 +26,7 @@ class AuthController {
 
     //Check if encrypted password match
     if (!user.ValidadeEncryptedPassword(password)) {
-      res.status(401).send({ error: 'password dont match!' });
+      res.status(401).send({ error: 'Password dont match!' });
       return;
     }
 
@@ -44,7 +44,7 @@ class AuthController {
     //Get parameters from the body
     const { oldPassword, newPassword } = req.body;
     if (!(oldPassword && newPassword)) {
-      res.status(401).send({ error: 'password invalid!' });
+      res.status(401).send({ error: 'Password invalid!' });
     }
 
     //Get user from the database
@@ -76,7 +76,7 @@ class AuthController {
     user.hashPassword();
     userRepository.save(user);
 
-    res.status(204).send({ success: 'password change with success!' });
+    res.status(204).send({ success: 'Password change with success!' });
   };
 }
 

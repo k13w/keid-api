@@ -57,16 +57,16 @@ class UserController {
         try {
 
             const userAlreadyExist = await userRepository.findOne({
-                where: { 
-                    email: req.body.email
-            }})
+                where: { email: req.body.email }
+              })
 
             if (userAlreadyExist) {
                 return res.status(409).send({ error: "email already in use" });
             }
+
             await userRepository.save(user);
-        } catch (e) {
-            res.status(409).send({ error: "username already in use" });
+        } catch (error) {
+              res.status(409).send({ error: "username already in use" });
             return;
         }
 
@@ -76,14 +76,14 @@ class UserController {
 
     static editUser = async (req: Request, res: Response) => {
         //Get the ID from the url
-        const id = req.params.id;
+        const id = res.locals.jwtPayload.userId
       
         //Get values from the body
         const { email, username, role } = req.body;
       
         //Try to find user on database
         const userRepository = getRepository(User);
-        let user;
+        let user: User;
 
         try {
           user = await userRepository.findOneOrFail(id);
@@ -94,7 +94,7 @@ class UserController {
         }
 
         //Validate the new values on model
-        email.email = email;
+        user.email = email;
         user.username = username;
         user.role = role;
 
@@ -112,7 +112,7 @@ class UserController {
             return;
         }
         //After all send a 204 (no content, but accepted) response
-        res.status(204).send();
+        res.status(204).send({ success: "user successfully changed" });
         };
 
     static deleteUser = async (req: Request, res: Response) => {
