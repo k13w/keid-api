@@ -17,8 +17,22 @@ createConnection()
   .then(async connection => {
     // Create a new express application instance
     const app = express();
+    const server = require('http').Server(app);
+    const io = require('socket.io')(server);
+
+    io.on('connection', client => {
+      client.on('connectRoom', box => { 
+        client.join(box);
+      });
+    });
 
     // Call midlewares
+    app.use((req, res, next) => {
+      req.io = io;
+
+      return next();
+    });
+
     app.use(cors());
     app.use(helmet());
     app.use(bodyParser.json());
@@ -29,7 +43,7 @@ createConnection()
     //Set all routes from routes folder
     app.use("/", routes);
 
-    app.listen(process.env.PORT || 7000, () => {
+    server.listen(process.env.PORT || 7000, () => {
       console.log("Server started on port 7000!");
     });
   })

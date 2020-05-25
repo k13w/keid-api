@@ -2,6 +2,7 @@ import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateCol
 import { Length, IsNotEmpty } from "class-validator";
 import bcrypt from "bcryptjs";
 import { Files } from './Files';
+import { Boxes } from './Boxes';
 
 @Entity()
 export class User {
@@ -24,6 +25,9 @@ export class User {
     @Column()
     @IsNotEmpty()
     role: string;
+
+    @OneToMany(type => Boxes, boxes => boxes.user_id)
+    boxes: Boxes[];
 
     @OneToMany(type => Files, files => files.user_id)
     files: Files[];
