@@ -25,7 +25,7 @@
    },
    "dependencies": {
       "@types/socket.io": "^2.1.8",
-      "aws-sdk": "^2.675.0",
+      "aws-sdk": "^2.814.0",
       "backblaze-b2": "^1.5.0",
       "bcryptjs": "^2.4.3",
       "body-parser": "^1.19.0",
